@@ -1,0 +1,71 @@
+<div class="row mx-3 py-3">
+
+    <h5>Customer Form</h5>
+
+    <form (ngSubmit)="onSubmit()">
+
+        <!-- First Name + Last Name -->
+        <div class="row py-3">
+
+            <div class="col">
+                <label class="form-label">First Name</label>
+
+                <input type="text" class="form-control" placeholder="First Name" [(ngModel)]="customerDetails.Firstname"
+                    name="Firstname">
+            </div>
+
+            <div class="col">
+                <label class="form-label">Last Name</label>
+
+                <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="customerDetails.Lastname"
+                    name="Lastname">
+            </div>
+
+        </div>
+
+
+        <!-- Email + Mobile -->
+        <div class="row py-3">
+
+            <div class="col">
+                <label class="form-label">Email</label>
+
+                <input type="email" class="form-control" placeholder="Email" [(ngModel)]="customerDetails.Email"
+                    name="Email">
+            </div>
+
+            <div class="col">
+                <label class="form-label">Phone No.</label>
+
+                <input type="text" class="form-control" placeholder="Phone Number" [(ngModel)]="customerDetails.Mobile"
+                    name="Mobile">
+            </div>
+
+        </div>
+
+
+        <!-- Registration Date + Customer ID -->
+        <div class="row py-3">
+
+            <div class="col">
+                <label class="form-label">Registration Date</label>
+
+                <input type="date" class="form-control" [(ngModel)]="customerDetails.Registrationdate"
+                    name="Registrationdate">
+            </div>
+
+            <div class="col">
+                <label class="form-label">Customer Id</label>
+
+                <input type="number" class="form-control" placeholder="Customer Id"
+                    [(ngModel)]="customerDetails.CustomerId" name="CustomerId">
+            </div>
+
+        </div>
+
+
+       <button type="submit" class="btn btn-primary">{{ isUpdate ? 'Update' : 'Add' }}</button>
+
+    </form>
+
+</div>

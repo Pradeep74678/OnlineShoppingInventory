@@ -1,0 +1,141 @@
+<div class="inventory-container">
+
+    <!-- Header -->
+    <div class="inventory-header">
+        <div>
+            <h2>Inventory</h2>
+            <p>Manage your inventory information</p>
+        </div>
+    </div>
+
+    <!-- Inventory Form -->
+    <div class="inventory-form-card">
+
+        <form>
+            <div class="row">
+
+                <div class="col-md-3">
+                    <label class="form-label">Product ID</label>
+                    <input type="text"
+                           class="form-control"
+                           [disabled]="isUpdate"
+                           [(ngModel)]="inventoryData.ProductId"
+                           name="ProductId"
+                           placeholder="Product ID">
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Product Name</label>
+                    <input type="text"
+                           class="form-control"
+                           [(ngModel)]="inventoryData.ProductName"
+                           name="ProductName"
+                           placeholder="Product Name">
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Stock Available</label>
+                    <input type="number"
+                           class="form-control"
+                           [(ngModel)]="inventoryData.StockAbilable"
+                           name="StockAbilable"
+                           placeholder="Stock Available">
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Reorder Stock</label>
+                    <input type="number"
+                           class="form-control"
+                           [(ngModel)]="inventoryData.ReorderStock"
+                           name="ReorderStock"
+                           placeholder="Reorder Stock">
+                </div>
+
+            </div>
+
+            <div class="form-button">
+                <button type="button"
+                        class="btn btn-primary"
+                        (click)="onSubmit()">
+                    {{ isUpdate ? 'Update' : 'Submit' }}
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- Inventory Details -->
+    <div class="inventory-details-header">
+        <div>
+            <h3>Inventory Details</h3>
+            <p>View and manage your products</p>
+        </div>
+    </div>
+
+
+    <!-- Inventory Table -->
+    <div class="inventory-table-card">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover">
+
+                <thead>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Stock Available</th>
+                        <th>Reorder Stock</th>
+                        <th class="action-column">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                   <tr *ngFor="let inventory of filteredInventoryDto; let i = index">
+
+                        <td class="product-id">
+                            {{ inventory.productId }}
+                        </td>
+
+                        <td class="product-name">
+                            {{ inventory.productName }}
+                        </td>
+
+                        <td>
+                            {{ inventory.stockAbilable }}
+                        </td>
+
+                        <td>
+                            {{ inventory.reorderStock }}
+                        </td>
+
+                        <td class="action-column">
+
+                            <button type="button"
+                                    class="btn btn-outline-primary btn-sm me-2"
+                                    (click)="UpdateInventory(inventory)">
+                                Edit
+                            </button>
+
+                            <button type="button"
+                                    class="btn btn-outline-danger btn-sm"
+                                    (click)="deleteInventory(inventory.productId)">
+                                Delete
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,93 @@
+/* Navbar */
+
+.custom-navbar {
+    min-height: 58px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Brand */
+
+.custom-navbar .navbar-brand {
+    font-size: 20px;
+    letter-spacing: 0.2px;
+}
+
+
+/* Navigation */
+
+.custom-navbar .nav-link {
+    color: rgba(255, 255, 255, 0.75);
+    padding: 8px 14px;
+    margin: 0 2px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+
+.custom-navbar .nav-link:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+
+/* Active menu */
+
+.custom-navbar .nav-link.active {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.14);
+    font-weight: 600;
+}
+
+
+/* Search */
+
+.navbar-search {
+    gap: 8px;
+}
+
+
+.navbar-search .form-control {
+    width: 220px;
+    border-radius: 6px;
+    border: none;
+}
+
+
+.navbar-search .form-control:focus {
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
+}
+
+
+.navbar-search .btn {
+    border-radius: 6px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+
+/* Space below fixed navbar */
+
+.navbar-space {
+    height: 58px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 767px) {
+
+    .custom-navbar .nav-link {
+        margin: 2px 0;
+    }
+
+    .navbar-search {
+        margin-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .navbar-search .form-control {
+        width: 100%;
+    }
+
+}

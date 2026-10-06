@@ -1,0 +1,87 @@
+<div class="container py-5" style="margin-top: -5px;">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold mb-1">Customer Details</h3>
+            <p class="text-muted mb-0">Manage your customer information</p>
+        </div>
+
+        <button type="button"
+                class="btn btn-primary px-4"
+                (click)="OpenModal()">
+            + Add New Customer
+        </button>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead>
+                        <tr>
+                            <th>Customer Id</th>
+                            <th>Customer Name</th>
+                            <th>Customer Email</th>
+                            <th>Phone Number</th>
+                            <th>Registration Date</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+  <tr *ngFor="let customer of filteredCustomerDetails">
+
+    <td class="px-4 fw-semibold">
+      {{customer.customerId}}
+    </td>
+
+    <td>
+      <div class="fw-semibold">
+        {{customer.firstname}} {{customer.lastname}}
+      </div>
+    </td>
+
+    <td class="text-muted">
+      {{customer.email}}
+    </td>
+
+    <td>
+      {{customer.mobile}}
+    </td>
+
+    <td>
+      {{customer.registrationdate}}
+    </td>
+
+    <td class="text-center">
+
+      <button
+        type="button"
+        class="btn btn-outline-primary btn-sm me-2 px-3"
+        (click)="OpenModal(customer)">
+        Edit
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-outline-danger btn-sm px-3"
+        (click)="deleteCustomer(customer.customerId)">
+        Delete
+      </button>
+
+    </td>
+
+  </tr>
+
+</tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,481 @@
+<div class="bill-container">
+
+    <!-- Header -->
+    <div class="bill-header">
+
+        <div>
+
+            <h2>
+                Billing & Payment
+            </h2>
+
+            <p>
+                Manage customer bills and payment details
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Bill Form -->
+    <div class="bill-form-card">
+
+        <form>
+
+            <div class="row g-4">
+
+
+                <!-- Bill Number -->
+                <div class="col-md-3">
+
+                    <label class="form-label">
+                        Bill No.
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Bill No."
+                        [(ngModel)]="billData.BillNo"
+                        name="BillNo">
+
+                </div>
+
+
+                <!-- Customer -->
+                <div class="col-md-3">
+
+                    <label class="form-label">
+                        Customer
+                    </label>
+
+                    <select
+                        class="form-select"
+                        [(ngModel)]="billData.CustomerId"
+                        name="CustomerId">
+
+
+                        <option [ngValue]="0">
+
+                            Select Customer
+
+                        </option>
+
+
+                        <option
+                            *ngFor="let customer of CustomerDetails"
+                            [ngValue]="customer.customerId">
+
+                            {{ customer.firstname }}
+                            {{ customer.lastname }}
+
+                        </option>
+
+
+                    </select>
+
+                </div>
+
+
+                <!-- Bill Date -->
+                <div class="col-md-3">
+
+                    <label class="form-label">
+                        Bill Date
+                    </label>
+
+                    <input
+                        type="date"
+                        class="form-control"
+                        [(ngModel)]="billData.BillDate"
+                        name="BillDate">
+
+                </div>
+
+
+                <!-- Total Bill Amount -->
+                <div class="col-md-3">
+
+                    <label class="form-label">
+                        Total Bill Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Total Amount"
+                        [(ngModel)]="billData.TotalAmount"
+                        name="TotalAmount"
+                        min="0"
+                        (input)="calculateBalance()">
+
+                </div>
+
+
+                <!-- Payment Received -->
+                <div class="col-md-3">
+
+                    <label class="form-label">
+                        Payment Received
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Payment Received"
+                        [(ngModel)]="billData.PaymentReceived"
+                        name="PaymentReceived"
+                        min="0"
+                        (input)="calculateBalance()">
+
+                </div>
+
+
+                <!-- Payment Date -->
+                <div class="col-md-3">
+
+                    <label class="form-label">
+                        Payment Date
+                    </label>
+
+                    <input
+                        type="date"
+                        class="form-control"
+                        [(ngModel)]="billData.PaymentDate"
+                        name="PaymentDate">
+
+                </div>
+
+
+                <!-- Payment Method -->
+                <div class="col-md-3">
+
+                    <label class="form-label">
+                        Payment Method
+                    </label>
+
+                    <select
+                        class="form-select"
+                        [(ngModel)]="billData.PaymentMethod"
+                        name="PaymentMethod">
+
+
+                        <option value="">
+
+                            Select Payment Method
+
+                        </option>
+
+
+                        <option value="Cash">
+                            Cash
+                        </option>
+
+
+                        <option value="UPI">
+                            UPI
+                        </option>
+
+
+                        <option value="Card">
+                            Card
+                        </option>
+
+
+                        <option value="Bank Transfer">
+                            Bank Transfer
+                        </option>
+
+
+                        <option value="Cheque">
+                            Cheque
+                        </option>
+
+
+                    </select>
+
+                </div>
+
+
+                <!-- Balance Amount -->
+                <div class="col-md-3">
+
+                    <label class="form-label">
+                        Balance Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control balance-input"
+                        [(ngModel)]="billData.BalanceAmount"
+                        name="BalanceAmount"
+                        readonly>
+
+                </div>
+
+
+                <!-- Payment Status -->
+                <div class="col-md-3">
+
+                    <label class="form-label">
+                        Payment Status
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="billData.PaymentStatus"
+                        name="PaymentStatus"
+                        readonly>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- Buttons -->
+            <div class="form-button">
+
+
+                <!-- Save / Update -->
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="saveBill()">
+
+                    {{ isUpdate ? 'Update Bill' : 'Save Bill' }}
+
+                </button>
+
+
+                <!-- Clear -->
+                <button
+                    type="button"
+                    class="btn btn-secondary ms-2"
+                    (click)="clearForm()">
+
+                    Clear
+
+                </button>
+
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- Bill Details Header -->
+    <div class="bill-details-header">
+
+        <div>
+
+            <h3>
+                Bill & Payment Details
+            </h3>
+
+            <p>
+                View customer payment and outstanding balance
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Bill Table -->
+    <div class="bill-table-card">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Bill No.
+                        </th>
+
+                        <th>
+                            Customer
+                        </th>
+
+                        <th>
+                            Bill Date
+                        </th>
+
+                        <th>
+                            Total Amount
+                        </th>
+
+                        <th>
+                            Received
+                        </th>
+
+                        <th>
+                            Payment Date
+                        </th>
+
+                        <th>
+                            Method
+                        </th>
+
+                        <th>
+                            Balance
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <tr *ngFor="let bill of billDetails">
+
+
+                        <!-- Bill Number -->
+                        <td class="fw-semibold">
+
+                            {{ bill.billNo }}
+
+                        </td>
+
+
+                        <!-- Customer -->
+                        <td>
+
+                            {{ bill.customerName }}
+
+                        </td>
+
+
+                        <!-- Bill Date -->
+                        <td>
+
+                            {{ bill.billDate }}
+
+                        </td>
+
+
+                        <!-- Total Amount -->
+                        <td>
+
+                            ₹{{ bill.totalAmount }}
+
+                        </td>
+
+
+                        <!-- Received -->
+                        <td>
+
+                            ₹{{ bill.paymentReceived }}
+
+                        </td>
+
+
+                        <!-- Payment Date -->
+                        <td>
+
+                            {{ bill.paymentDate }}
+
+                        </td>
+
+
+                        <!-- Payment Method -->
+                        <td>
+
+                            {{ bill.paymentMethod }}
+
+                        </td>
+
+
+                        <!-- Balance -->
+                        <td class="fw-semibold">
+
+                            ₹{{ bill.balanceAmount }}
+
+                        </td>
+
+
+                        <!-- Status -->
+                        <td>
+
+                            <span
+                                class="status-badge"
+                                [ngClass]="{
+
+                                    'paid':
+                                    bill.paymentStatus === 'Paid',
+
+                                    'partial':
+                                    bill.paymentStatus === 'Partial',
+
+                                    'pending':
+                                    bill.paymentStatus === 'Pending'
+
+                                }">
+
+                                {{ bill.paymentStatus }}
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- Action -->
+                        <td>
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-primary btn-sm"
+                                (click)="UpdateBill(bill)">
+
+                                Edit
+
+                            </button>
+
+                        </td>
+
+
+                    </tr>
+
+
+                    <!-- No Record -->
+                    <tr *ngIf="billDetails.length === 0">
+
+                        <td
+                            colspan="10"
+                            class="text-center text-muted py-4">
+
+                            No bill records found
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

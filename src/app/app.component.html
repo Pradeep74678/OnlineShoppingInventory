@@ -1,0 +1,100 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark custom-navbar">
+
+  <div class="container-fluid px-4">
+
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold" routerLink="/">
+      Online Shopping
+    </a>
+
+    <!-- Mobile Toggle -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarCollapse"
+      aria-controls="navbarCollapse"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+
+      <span class="navbar-toggler-icon"></span>
+
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+
+      <!-- Navigation -->
+      <ul class="navbar-nav me-auto mb-2 mb-md-0 ms-md-4">
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+            Home
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/inventory"
+            routerLinkActive="active">
+            Inventory
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/customer"
+            routerLinkActive="active">
+            Customer
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/bill"
+            routerLinkActive="active">
+            Bill
+          </a>
+        </li>
+
+      </ul>
+
+      <!-- Search -->
+      <form
+        class="d-flex navbar-search"
+        role="search"
+        (ngSubmit)="onSearch()">
+
+        <input
+          class="form-control"
+          type="search"
+          placeholder="Search..."
+          aria-label="Search"
+           [(ngModel)]="searchText"
+    (ngModelChange)="onSearchTextChange()"
+          name="searchText">
+
+        <button
+          class="btn btn-outline-light"
+          type="submit">
+          Search
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</nav>
+
+<!-- Space for fixed navbar -->
+<div class="navbar-space"></div>
+
+<router-outlet></router-outlet>
